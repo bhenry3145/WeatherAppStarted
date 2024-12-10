@@ -39,3 +39,16 @@ function geocodingAPI() {
 }
 
 // geocodingAPI();
+
+
+let dayNightButton = document.getElementById('dayNightButton');
+
+dayNightButton.addEventListener('click', () => {
+    document.body.classList.toggle('dark-bg');
+})
+
+let searchButton = document.getElementById('searchButton');
+
+searchButton.addEventListener('click', () => {
+
+})

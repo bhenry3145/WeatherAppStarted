@@ -11,12 +11,40 @@
 
     <div class="top">
         <div class="search">
-            <button id="searchButton" type="button" class="btn">search text <i class="fa-solid fa-magnifying-glass"></i></button>
+            <button id="searchButton" id="dropdownMenuButton" aria-expanded="false" type="button" class="btn" data-bs-toggle="dropdown">search text <i class="fa-solid fa-magnifying-glass"></i></button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li id="stocktonWeather">
+                    <a class="dropdown-item" href="#">Stockton, CA</a>
+                    <p class="dropdown-item">CURRENT WEATHER: </p>
+                </li>
+                <li id="elkgroveWeather">
+                    <a class="dropdown-item" href="#">Elk Grove, CA</a>
+                    <p class="dropdown-item">CURRENT WEATHER: </p>
+                </li>
+                <li id="newyorkWeather">
+                    <a class="dropdown-item" href="#">New York, NY</a>
+                    <p class="dropdown-item">CURRENT WEATHER: </p>
+                </li>
+            </ul>
         </div>
         <div class="favorite">
-            <button id="favoritesButton" type="button" class="favBtn"><i class="fa-regular fa-star fa-lg"></i>Favorites dropdown</button>
+            <button id="favoritesButton" type="button" class="favBtn" data-bs-toggle="offcanvas" data-bs-target="#offcanvasFavorites"><i class="fa-regular fa-star fa-lg"></i>Favorites dropdown</button>
         </div>
     </div>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasFavorites" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header favorites-header">
+            <h5 class="offcanvas-title" id="offcanvasFavorites">Favorites</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body favorites-bg">
+            <h1>Stockton</h1>
+            <h1>Lodi</h1>
+            <h1>Modesto</h1>
+            <h1>Elk Grove</h1>
+        </div>
+    </div>
+    
 
     <div class="middle">
         <h1 id="cityName">N/a</h1>

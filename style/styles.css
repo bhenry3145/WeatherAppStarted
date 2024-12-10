@@ -3,6 +3,15 @@ body {
     color: white;
 }
 
+.dark-bg {
+    background-color: #1E2629;
+}
+
+.white-bg {
+    background-color: white;
+    color: black;
+}
+
 #searchButton {
     color: white;
     background-color: #226C8C;
@@ -11,9 +20,48 @@ body {
     font-weight: light;
     margin-right: 4rem;
     border: 1px solid black;
-    border-radius: 16px;
+    border-radius: 30px;
     margin: 4rem;
     padding: 1rem;
+}
+
+.dropdown-menu {
+    width: 300px;
+    border-radius: 30px;
+}
+
+#dropdownMenuButton {
+    border: 1px solid black;
+}
+
+#searchButton:hover {
+    background-color: #1b6180;
+}
+
+.search i:hover {
+    transform:scaleY(1.2)
+}
+
+#favoritesButton:hover {
+    background-color: white;
+    color: black;
+}
+
+.favorites-bg {
+    background-color: #1E2629;
+    color: white;
+    padding-left: 2rem;
+}
+
+.favorites-header {
+    background-color: #1E2629;
+    color: white;
+    font-size: large;
+}
+
+.favorites-header h5 {
+    padding-left: 4rem;
+    font-size: 32px;
 }
 
 .top {
@@ -22,7 +70,7 @@ body {
 }
 
 .search i {
-    padding-left: 8rem;
+    padding-left: 12rem;
 }
 
 .favorite {
