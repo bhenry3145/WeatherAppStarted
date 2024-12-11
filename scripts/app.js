@@ -3,9 +3,8 @@ let lat = "48.1486";
 let lon = '17.1077';
 let location = 'Bratislava, Slovakia';
 
+let searchInput = document.getElementById('searchInput');
 let stocktonWeather = document.getElementById('stocktonWeather');
-let elkgroveWeather = document.getElementById('elkgroveWeather');
-let newyorkWeather = document.getElementById('newyorkWeather');
 let favoritesList = document.getElementById('favoritesList');
 let cityName = document.getElementById('cityName');
 let temperature = document.getElementById('temperature');
@@ -35,17 +34,6 @@ let dayOfWeek5 = document.getElementById('dayOfWeek5');
 let maxTemp = document.getElementById('maxTemp');
 let minTemp = document.getElementById('minTemp');
 
-
-// function myAPICall() {
-//     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=37.9577&lon=-121.2908&appid=${APIKEY}`)
-//     .then((response) => {
-//         return response.json()
-//     })
-//     .then((data) => {
-//         console.log(data);
-//     })
-// }
-
 async function myAPICall() {
     const promise = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=37.9577&lon=-121.2908&appid=${APIKEY}`);
     const dataMy = await promise.json();
@@ -53,16 +41,6 @@ async function myAPICall() {
 }
 
 // myAPICall();
-
-// function fiveDayWeatherAPI() {
-//     fetch(`api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIkey}`)
-//     .then((response) => {
-//         return response.json()
-//     })
-//     .then((data) => {
-//         console.log(data);
-//     })
-// }
 
 async function fiveDayWeatherAPI() {
     const promise = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKEY}`);
@@ -72,19 +50,10 @@ async function fiveDayWeatherAPI() {
 
 // fiveDayWeatherAPI();
 
-// function geocodingAPI() {
-//     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${APIkey}`)
-//     .then((response) => {
-//         return response.json()
-//     })
-//     .then((data) => {
-//         console.log(data);
-//     })
-// }
-
 async function geocodingAPI() {
     const promise = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${APIKEY}`);
     const dataGeo = await promise.json();
+    console.log(dataGeo);
     return dataGeo;
 }
 
@@ -104,12 +73,6 @@ addToFavorites.addEventListener('click', () => {
     h1tag.innerText = " ";
     favoritesList.appendChild(h1tag);
 })
-
-let searchButton = document.getElementById('searchButton');
-
-// searchButton.addEventListener('click', () => {
-
-// })
 
 async function stocktonWeatherFunc() {
     let dataMy = await myAPICall();
@@ -132,6 +95,36 @@ async function stocktonWeatherFunc() {
     date.innerText = `${monthArr[month]}/${dayOfMonth}/${year}`
 }
 
-stocktonWeather.addEventListener('click', function() {
-    stocktonWeatherFunc();
+searchInput.addEventListener('keypress', function(event) {
+    if (event.key == "Enter")
+    {
+        let location = searchInput.value;
+        console.log(`Location set to: ${location}`);
+        console.log(lat);
+        console.log(lon);
+    }
 })
+
+async function searchFunc() {
+    let dataGeo = await geocodingAPI();
+    let lat = dataGeo[0].lat;
+    let lon = dataGeo[0].lon;
+    let ms = dataGeo.dt * 1000;
+    let newDate = new Date(ms);
+    let month = newDate.getMonth();
+    let monthArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    let year = newDate.getFullYear()
+    let dayOfMonth = newDate.getDate();
+    const kelvinToFahrenheit = (kelvin) => ((kelvin - 273.15) * 9/5 + 32).toFixed(0);
+    let temp = kelvinToFahrenheit(dataGeo.main.temp);
+    let tempMax = kelvinToFahrenheit(dataGeo.main.temp_max);
+    let tempMin = kelvinToFahrenheit(dataGeo.main.temp_min);
+    temperature.innerText = `${temp}°F`;
+    maxTemp.innerText = `Max: ${tempMax}°F`;
+    minTemp.innerText = `Min: ${tempMin}°F`;
+}
+
+// stocktonWeather.addEventListener('click', function() {
+//     stocktonWeatherFunc();
+// })
+

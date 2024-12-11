@@ -12,6 +12,12 @@ body {
     color: black;
 }
 
+.top form {
+    width: 12rem;
+    height: 2rem;
+    margin: 4rem;
+}
+
 #searchButton {
     color: white;
     background-color: #226C8C;

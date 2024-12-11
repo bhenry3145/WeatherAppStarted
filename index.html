@@ -10,23 +10,9 @@
   <body>
 
     <div class="top">
-        <div class="search">
-            <button id="searchButton" id="dropdownMenuButton" aria-expanded="false" type="button" class="btn" data-bs-toggle="dropdown">search text <i class="fa-solid fa-magnifying-glass"></i></button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li>
-                    <p id="stocktonWeather" class="dropdown-item">Stockton, CA</p>
-                    <p class="dropdown-item">CURRENT WEATHER: </p>
-                </li>
-                <li id="elkgroveWeather">
-                    <a class="dropdown-item" href="#">Elk Grove, CA</a>
-                    <p class="dropdown-item">CURRENT WEATHER: </p>
-                </li>
-                <li id="newyorkWeather">
-                    <a class="dropdown-item" href="#">New York, NY</a>
-                    <p class="dropdown-item">CURRENT WEATHER: </p>
-                </li>
-            </ul>
-        </div>
+        <form class="d-flex" role="search">
+            <input id="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          </form>
         <div class="favorite">
             <button id="favoritesButton" type="button" class="favBtn" data-bs-toggle="offcanvas" data-bs-target="#offcanvasFavorites"><i class="fa-regular fa-star fa-lg"></i>Favorites dropdown</button>
         </div>
