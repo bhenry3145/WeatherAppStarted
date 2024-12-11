@@ -48,8 +48,8 @@ let minTemp = document.getElementById('minTemp');
 
 async function myAPICall() {
     const promise = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=37.9577&lon=-121.2908&appid=${APIKEY}`);
-    const data = await promise.json();
-    console.log(data);
+    const dataMy = await promise.json();
+    return dataMy;
 }
 
 // myAPICall();
@@ -66,8 +66,8 @@ async function myAPICall() {
 
 async function fiveDayWeatherAPI() {
     const promise = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKEY}`);
-    const data = await promise.json();
-    console.log(data);
+    const dataFive = await promise.json();
+    return dataFive;
 }
 
 // fiveDayWeatherAPI();
@@ -84,8 +84,8 @@ async function fiveDayWeatherAPI() {
 
 async function geocodingAPI() {
     const promise = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${APIKEY}`);
-    const data = await promise.json();
-    console.log(data);
+    const dataGeo = await promise.json();
+    return dataGeo;
 }
 
 // geocodingAPI();
@@ -99,7 +99,7 @@ dayNightButton.addEventListener('click', () => {
 
 let addToFavorites = document.getElementById('addToFavorites');
 
-addToFavorites.addEventListener('click', ()=> {
+addToFavorites.addEventListener('click', () => {
     let h1tag = document.createElement('h1');
     h1tag.innerText = " ";
     favoritesList.appendChild(h1tag);
@@ -110,3 +110,25 @@ let searchButton = document.getElementById('searchButton');
 // searchButton.addEventListener('click', () => {
 
 // })
+
+async function stocktonWeatherFunc() {
+    let dataMy = await myAPICall();
+    console.log(dataMy);
+    let ms = dataMy.dt * 1000;
+    let newDate = new Date(ms);
+    let month = newDate.getMonth();
+    let monthArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    let year = newDate.getFullYear()
+    let dayOfMonth = newDate.getDate();
+    temperature.innerText = `${dataMy.main.temp}`;
+    maxTemp.innerText = `Max: ${dataMy.main.temp_max}`;
+    minTemp.innerText = `Min: ${dataMy.main.temp_min}`;
+    currentWeatherIcon.src = `http://openweathermap.org/img/wn/${dataMy.weather[0].icon}@2x.png`;
+    weatherDescription.innerText = `${dataMy.weather[0].description}`;
+    cityName.innerText = `${dataMy.name}`;
+    date.innerText = `${monthArr[month]}/${dayOfMonth}/${year}`
+}
+
+stocktonWeather.addEventListener('click', function() {
+    stocktonWeatherFunc();
+})
