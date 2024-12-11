@@ -113,16 +113,19 @@ let searchButton = document.getElementById('searchButton');
 
 async function stocktonWeatherFunc() {
     let dataMy = await myAPICall();
-    console.log(dataMy);
     let ms = dataMy.dt * 1000;
     let newDate = new Date(ms);
     let month = newDate.getMonth();
     let monthArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     let year = newDate.getFullYear()
     let dayOfMonth = newDate.getDate();
-    temperature.innerText = `${dataMy.main.temp}`;
-    maxTemp.innerText = `Max: ${dataMy.main.temp_max}`;
-    minTemp.innerText = `Min: ${dataMy.main.temp_min}`;
+    const kelvinToFahrenheit = (kelvin) => ((kelvin - 273.15) * 9/5 + 32).toFixed(0);
+    let temp = kelvinToFahrenheit(dataMy.main.temp);
+    let tempMax = kelvinToFahrenheit(dataMy.main.temp_max);
+    let tempMin = kelvinToFahrenheit(dataMy.main.temp_min);
+    temperature.innerText = `${temp}°F`;
+    maxTemp.innerText = `Max: ${tempMax}°F`;
+    minTemp.innerText = `Min: ${tempMin}°F`;
     currentWeatherIcon.src = `http://openweathermap.org/img/wn/${dataMy.weather[0].icon}@2x.png`;
     weatherDescription.innerText = `${dataMy.weather[0].description}`;
     cityName.innerText = `${dataMy.name}`;
