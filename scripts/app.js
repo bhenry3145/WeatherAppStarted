@@ -45,6 +45,7 @@ async function myAPICall() {
 async function fiveDayWeatherAPI() {
     const promise = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKEY}`);
     const dataFive = await promise.json();
+    console.log(dataFive);
     return dataFive;
 }
 
@@ -102,6 +103,10 @@ searchInput.addEventListener('keypress', function(event) {
         console.log(`Location set to: ${location}`);
         console.log(lat);
         console.log(lon);
+        fiveDayWeatherAPI();
+        let temp = (dataFive.list[0].main.temp + dataFive.list[1].main.temp + dataFive.list[2].main.temp + dataFive.list[3].main.temp + dataFive.list[4].main.temp + dataFive.list[5].main.temp + dataFive.list[6].main.temp + dataFive.list[7].main.temp) / 8;
+        let maxTemp = (dataFive.list[0].main.temp_max + dataFive.list[1].main.temp_max + dataFive.list[2].main.temp_max + dataFive.list[3].main.temp_max + dataFive.list[4].main.temp_max + dataFive.list[5].main.temp_max + dataFive.list[6].main.temp_max + dataFive.list[7].main.temp_max) / 8;
+        let minTemp = (dataFive.list[0].main.temp_min + dataFive.list[1].main.temp_min + dataFive.list[2].main.temp_min + dataFive.list[3].main.temp_min + dataFive.list[4].main.temp_min + dataFive.list[5].main.temp_min + dataFive.list[6].main.temp_min + dataFive.list[7].main.temp_min) / 8;
     }
 })
 
