@@ -111,6 +111,17 @@ body {
     font-size: 30px;
     border-radius: 0;
     margin-right: 4rem;
+    padding: 0;
+}
+
+#addToFavorites {
+    border: 1px solid #226C8C;
+    background-color: #226C8C;
+    color: white;
+}
+
+.fa-calendar {
+    padding-left: 1rem;
 }
 
 .middle {
