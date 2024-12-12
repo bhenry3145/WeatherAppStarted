@@ -22,6 +22,7 @@ body {
     border: 1px solid black;
     color: white;
     background-color: #1b6180;
+    border-radius: 30px;
 }
 
 #searchButton {
