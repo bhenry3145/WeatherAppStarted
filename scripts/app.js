@@ -5,7 +5,7 @@ let addToFavorites = document.getElementById('addToFavorites');
 
 addToFavorites.addEventListener('click', () => {
     let h1tag = document.createElement('h1');
-    h1tag.innerText = " ";
+    h1tag.innerText = searchInput.value;
     favoritesList.appendChild(h1tag);
 })
 
@@ -140,8 +140,3 @@ function searchFunc(dataFive, dataMy) {
 
 }
 
-addToFavorites.addEventListener('click', function () {
-    let listFavorite = document.createElement('h1');
-    listFavorite.textContent = dataMy.name;
-    favoritesList.appendChild(listFavorite);
-})
