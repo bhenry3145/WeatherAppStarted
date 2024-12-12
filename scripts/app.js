@@ -126,27 +126,32 @@ function searchFunc(dataFive, dataMy) {
     temperature1.innerText = `${avgDay1Temp}°F`;
     weatherIcon1.src = `http://openweathermap.org/img/wn/${dataFive.list[0].weather[0].icon}@2x.png`;
     weatherDescription1.innerText =`${dataFive.list[0].weather[0].description}`;
+    dayOfWeek1.innerText = "Today";
     
 
     let avgDay2Temp = kelvinToFahrenheit(`${(dataFive.list[8].main.temp + dataFive.list[9].main.temp + dataFive.list[10].main.temp + dataFive.list[11].main.temp + dataFive.list[12].main.temp + dataFive.list[13].main.temp + dataFive.list[14].main.temp + dataFive.list[15].main.temp) / 8}`);
     temperature2.innerText = `${avgDay2Temp}°F`;
     weatherIcon2.src = `http://openweathermap.org/img/wn/${dataFive.list[13].weather[0].icon}@2x.png`;
     weatherDescription2.innerText =`${dataFive.list[13].weather[0].description}`;
+    dayOfWeek2.innerText = `${monthArr[month]}/${dayOfMonth + 1}/${year}`;
 
     let avgDay3Temp = kelvinToFahrenheit(`${(dataFive.list[16].main.temp + dataFive.list[17].main.temp + dataFive.list[18].main.temp + dataFive.list[19].main.temp + dataFive.list[20].main.temp + dataFive.list[21].main.temp + dataFive.list[22].main.temp + dataFive.list[23].main.temp) / 8}`);
     temperature3.innerText = `${avgDay3Temp}°F`;
     weatherIcon3.src = `http://openweathermap.org/img/wn/${dataFive.list[21].weather[0].icon}@2x.png`;
     weatherDescription3.innerText =`${dataFive.list[21].weather[0].description}`;
+    dayOfWeek3.innerText = `${monthArr[month]}/${dayOfMonth + 2}/${year}`;
 
     let avgDay4Temp = kelvinToFahrenheit(`${(dataFive.list[24].main.temp + dataFive.list[25].main.temp + dataFive.list[26].main.temp + dataFive.list[27].main.temp + dataFive.list[28].main.temp + dataFive.list[29].main.temp + dataFive.list[30].main.temp + dataFive.list[31].main.temp) / 8}`);
     temperature4.innerText = `${avgDay4Temp}°F`;
     weatherIcon4.src = `http://openweathermap.org/img/wn/${dataFive.list[26].weather[0].icon}@2x.png`;
     weatherDescription4.innerText =`${dataFive.list[26].weather[0].description}`;
+    dayOfWeek4.innerText = `${monthArr[month]}/${dayOfMonth + 3}/${year}`;
 
     let avgDay5Temp = kelvinToFahrenheit(`${(dataFive.list[32].main.temp + dataFive.list[33].main.temp + dataFive.list[34].main.temp + dataFive.list[35].main.temp + dataFive.list[36].main.temp + dataFive.list[37].main.temp + dataFive.list[38].main.temp + dataFive.list[39].main.temp) / 8}`);
     temperature5.innerText = `${avgDay5Temp}°F`;
     weatherIcon5.src = `http://openweathermap.org/img/wn/${dataFive.list[37].weather[0].icon}@2x.png`;
     weatherDescription5.innerText =`${dataFive.list[37].weather[0].description}`;
+    dayOfWeek5.innerText = `${monthArr[month]}/${dayOfMonth + 4}/${year}`;
 
 }
 

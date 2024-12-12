@@ -133,12 +133,17 @@ body {
     display: grid;
     grid-template-columns: repeat(5, auto);
     padding: 4rem;
+    gap: 1rem;
 }
 
 .flex-center {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.flex-center h2 {
+    font-size: 24px;
 }
 
 .bottom {
