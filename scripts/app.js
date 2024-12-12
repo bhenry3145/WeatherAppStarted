@@ -1,4 +1,18 @@
 import { APIKEY } from "./environment.js";
+import { saveToLocalStorage, getFromLocalStorage } from "./localStorage.js";
+
+let addToFavorites = document.getElementById('addToFavorites');
+
+addToFavorites.addEventListener('click', () => {
+    let h1tag = document.createElement('h1');
+    h1tag.innerText = " ";
+    favoritesList.appendChild(h1tag);
+})
+
+addToFavorites.addEventListener('click', () => {
+    let userInput = searchInput.value;
+    saveToLocalStorage(userInput);
+})
 
 let searchInput = document.getElementById('searchInput');
 let stocktonWeather = document.getElementById('stocktonWeather');
@@ -48,7 +62,7 @@ async function fiveDayWeatherAPI(lat, lon) {
 // fiveDayWeatherAPI();
 
 async function geocodingAPI(location) {
-    const promise = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${APIKEY}`);
+    const promise = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${APIKEY}`);
     const dataGeo = await promise.json();
     return dataGeo;
 }
@@ -61,35 +75,6 @@ let dayNightButton = document.getElementById('dayNightButton');
 dayNightButton.addEventListener('click', () => {
     document.body.classList.toggle('dark-bg');
 })
-
-let addToFavorites = document.getElementById('addToFavorites');
-
-addToFavorites.addEventListener('click', () => {
-    let h1tag = document.createElement('h1');
-    h1tag.innerText = " ";
-    favoritesList.appendChild(h1tag);
-})
-
-async function stocktonWeatherFunc() {
-    let dataMy = await myAPICall();
-    let ms = dataMy.dt * 1000;
-    let newDate = new Date(ms);
-    let month = newDate.getMonth();
-    let monthArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-    let year = newDate.getFullYear()
-    let dayOfMonth = newDate.getDate();
-    const kelvinToFahrenheit = (kelvin) => ((kelvin - 273.15) * 9/5 + 32).toFixed(0);
-    let temp = kelvinToFahrenheit(dataMy.main.temp);
-    let tempMax = kelvinToFahrenheit(dataMy.main.temp_max);
-    let tempMin = kelvinToFahrenheit(dataMy.main.temp_min);
-    temperature.innerText = `${temp}°F`;
-    maxTemp.innerText = `Max: ${tempMax}°F`;
-    minTemp.innerText = `Min: ${tempMin}°F`;
-    currentWeatherIcon.src = `http://openweathermap.org/img/wn/${dataMy.weather[0].icon}@2x.png`;
-    weatherDescription.innerText = `${dataMy.weather[0].description}`;
-    cityName.innerText = `${dataMy.name}`;
-    date.innerText = `${monthArr[month]}/${dayOfMonth}/${year}`
-}
 
 searchInput.addEventListener('keydown', async function(event) {
     if (event.key == "Enter")
@@ -155,7 +140,8 @@ function searchFunc(dataFive, dataMy) {
 
 }
 
-// stocktonWeather.addEventListener('click', function() {
-//     stocktonWeatherFunc();
-// })
-
+addToFavorites.addEventListener('click', function () {
+    let listFavorite = document.createElement('h1');
+    listFavorite.textContent = dataMy.name;
+    favoritesList.appendChild(listFavorite);
+})
