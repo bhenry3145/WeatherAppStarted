@@ -15,7 +15,6 @@ addToFavorites.addEventListener('click', () => {
 })
 
 let searchInput = document.getElementById('searchInput');
-let stocktonWeather = document.getElementById('stocktonWeather');
 let favoritesList = document.getElementById('favoritesList');
 let cityName = document.getElementById('cityName');
 let temperature = document.getElementById('temperature');
