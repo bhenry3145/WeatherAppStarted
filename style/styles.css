@@ -12,10 +12,16 @@ body {
     color: black;
 }
 
-.top form {
+.searchDiv {
     width: 12rem;
     height: 2rem;
     margin: 4rem;
+}
+
+.top input {
+    border: 1px solid black;
+    color: white;
+    background-color: #1b6180;
 }
 
 #searchButton {
