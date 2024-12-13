@@ -1,6 +1,9 @@
 import { APIKEY } from "./environment.js";
 import { saveToLocalStorage, getFromLocalStorage } from "./localStorage.js";
 
+let lat = "";
+let lon = "";
+
 let addToFavorites = document.getElementById('addToFavorites');
 
 addToFavorites.addEventListener('click', () => {
@@ -9,10 +12,15 @@ addToFavorites.addEventListener('click', () => {
     favoritesList.appendChild(h1tag);
 })
 
+
 addToFavorites.addEventListener('click', () => {
     let userInput = searchInput.value;
     saveToLocalStorage(userInput);
 })
+
+// h1tag.addEventListener('click', () => {
+//     location = h1tag.value;
+// })
 
 let searchInput = document.getElementById('searchInput');
 let favoritesList = document.getElementById('favoritesList');
@@ -67,6 +75,17 @@ async function geocodingAPI(location) {
 }
 
 // geocodingAPI();
+
+
+navigator.geolocation.getCurrentPosition( success )
+
+async function success(position) {
+    lat = position.coords.latitude;
+    lon = position.coords.longitude;
+    const dataFive = await fiveDayWeatherAPI(lat, lon);
+    let dataMy = await myAPICall(lat,lon);
+    searchFunc(dataFive, dataMy)
+}
 
 
 let dayNightButton = document.getElementById('dayNightButton');
