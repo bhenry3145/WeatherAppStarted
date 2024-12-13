@@ -36,26 +36,9 @@ let minTemp = document.getElementById('minTemp');
 let addToFavorites = document.getElementById('addToFavorites');
 
 addToFavorites.addEventListener('click', function(event) {
-    deleteStorage();
-})
-
-
-async function deleteStorage() {
-    let h1tag = document.createElement('h1');
-    let removeButton = document.createElement('button');
-    removeButton.innerText = "x";
-    removeButton.addEventListener('click', () => {
-        removeFromLocalStorage(favorites);
-        h1tag.remove();
-    })
-    h1tag.appendChild(removeButton);
-    favoritesList.appendChild(h1tag);
-}
-
-
-addToFavorites.addEventListener('click', () => {
     let userInput = searchInput.value;
     saveToLocalStorage(userInput);
+    loadFavorites();
 })
 
 
@@ -65,7 +48,6 @@ async function myAPICall(lat, lon) {
     return dataMy;
 }
 
-deleteStorage();
 // myAPICall();
 
 async function fiveDayWeatherAPI(lat, lon) {
@@ -113,8 +95,8 @@ searchInput.addEventListener('keydown', async function(event) {
     }
 })
 
-async function favoritesLoading() {
-    let geoData = await geocodingAPI(location);
+async function favoritesLoading(favoritesLocation) {
+    let geoData = await geocodingAPI(favoritesLocation);
     let dataMy = await myAPICall(geoData[0].lat, geoData[0].lon);
     const dataFive = await fiveDayWeatherAPI(geoData[0].lat, geoData[0].lon);
     searchFunc(dataFive, dataMy);
@@ -180,12 +162,19 @@ async function loadFavorites() {
     let localStorage = getFromLocalStorage();
     localStorage.map(favorites => {
         let h1tag = document.createElement('h1');
+        let removeButton = document.createElement('button');
+        removeButton.innerText = "x";
+        removeButton.addEventListener('click', () => {
+            removeFromLocalStorage(favorites);
+            h1tag.remove();
+    })
+    
         h1tag.innerText = favorites;
         h1tag.addEventListener('click', function() {
-            location = h1tag.innerText;
-            favoritesLoading();
+            favoritesLoading(favorites);
         })
-        favoritesList.appendChild(h1tag); 
+        h1tag.appendChild(removeButton);
+        favoritesList.appendChild(h1tag);
     })
 
 }
