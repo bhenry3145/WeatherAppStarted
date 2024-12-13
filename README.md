@@ -26,4 +26,5 @@ Can use this for ideas: Some Ideas
 
 Must pull api from https://openweathermap.org/
 
-Peer Review: 
+Peer Review: Chris Wells-Hott
+Cooment: Great Job pull data from the APi and displaying it everything workd fine.We just have to figure out use the api key when its in the enviroment.js so it can work.Your code is clean and simple.good work.
