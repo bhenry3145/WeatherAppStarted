@@ -1,29 +1,11 @@
 import { APIKEY } from "./environment.js";
-import { saveToLocalStorage, getFromLocalStorage } from "./localStorage.js";
+import { saveToLocalStorage, getFromLocalStorage, removeFromLocalStorage } from "./localStorage.js";
 
 let lat = "";
 let lon = "";
-
-let addToFavorites = document.getElementById('addToFavorites');
-
-addToFavorites.addEventListener('click', () => {
-    let h1tag = document.createElement('h1');
-    h1tag.innerText = searchInput.value;
-    favoritesList.appendChild(h1tag);
-})
-
-
-addToFavorites.addEventListener('click', () => {
-    let userInput = searchInput.value;
-    saveToLocalStorage(userInput);
-})
-
-// h1tag.addEventListener('click', () => {
-//     location = h1tag.value;
-// })
-
-let searchInput = document.getElementById('searchInput');
+let location = "";
 let favoritesList = document.getElementById('favoritesList');
+let searchInput = document.getElementById('searchInput');
 let cityName = document.getElementById('cityName');
 let temperature = document.getElementById('temperature');
 let currentWeatherIcon = document.getElementById('currentWeatherIcon');
@@ -51,6 +33,31 @@ let weatherDescription5 = document.getElementById('weatherDescription5');
 let dayOfWeek5 = document.getElementById('dayOfWeek5');
 let maxTemp = document.getElementById('maxTemp');
 let minTemp = document.getElementById('minTemp');
+let addToFavorites = document.getElementById('addToFavorites');
+
+addToFavorites.addEventListener('click', function(event) {
+    deleteStorage();
+})
+
+
+async function deleteStorage() {
+    let h1tag = document.createElement('h1');
+    let removeButton = document.createElement('button');
+    removeButton.innerText = "x";
+    removeButton.addEventListener('click', () => {
+        removeFromLocalStorage(favorites);
+        h1tag.remove();
+    })
+    h1tag.appendChild(removeButton);
+    favoritesList.appendChild(h1tag);
+}
+
+
+addToFavorites.addEventListener('click', () => {
+    let userInput = searchInput.value;
+    saveToLocalStorage(userInput);
+})
+
 
 async function myAPICall(lat, lon) {
     const promise = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKEY}`);
@@ -58,6 +65,7 @@ async function myAPICall(lat, lon) {
     return dataMy;
 }
 
+deleteStorage();
 // myAPICall();
 
 async function fiveDayWeatherAPI(lat, lon) {
@@ -97,13 +105,20 @@ dayNightButton.addEventListener('click', () => {
 searchInput.addEventListener('keydown', async function(event) {
     if (event.key == "Enter")
     {
-        let location = searchInput.value;
+        location = searchInput.value;
         let geoData = await geocodingAPI(location);
         let dataMy = await myAPICall(geoData[0].lat, geoData[0].lon);
         const dataFive = await fiveDayWeatherAPI(geoData[0].lat, geoData[0].lon);
         searchFunc(dataFive, dataMy);
     }
 })
+
+async function favoritesLoading() {
+    let geoData = await geocodingAPI(location);
+    let dataMy = await myAPICall(geoData[0].lat, geoData[0].lon);
+    const dataFive = await fiveDayWeatherAPI(geoData[0].lat, geoData[0].lon);
+    searchFunc(dataFive, dataMy);
+}
 
 function searchFunc(dataFive, dataMy) {
     // console.log(dataFive, dataMy);
@@ -158,3 +173,19 @@ function searchFunc(dataFive, dataMy) {
 
 }
 
+loadFavorites();
+
+async function loadFavorites() {
+
+    let localStorage = getFromLocalStorage();
+    localStorage.map(favorites => {
+        let h1tag = document.createElement('h1');
+        h1tag.innerText = favorites;
+        h1tag.addEventListener('click', function() {
+            location = h1tag.innerText;
+            favoritesLoading();
+        })
+        favoritesList.appendChild(h1tag); 
+    })
+
+}
