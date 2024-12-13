@@ -160,6 +160,7 @@ loadFavorites();
 async function loadFavorites() {
 
     let localStorage = getFromLocalStorage();
+    favoritesList.innerText = "";
     localStorage.map(favorites => {
         let h1tag = document.createElement('h1');
         let removeButton = document.createElement('button');
